@@ -18,12 +18,12 @@ import {
       <Tr colorScheme='blue'
       color={'red'}>
         <Th>Name</Th>
-        <Th>mothername</Th>
-        <Th>fathername</Th>
-        <Th>email</Th>
-        <Th>dob</Th>
-        <Th>mobile no</Th>
-        <Th>branch</Th>
+        <Th>Mother name</Th>
+        <Th>Father name</Th>
+        <Th>Email</Th>
+        <Th>DOB</Th>
+        <Th>Mobile no</Th>
+        <Th>Branch</Th>
       </Tr>
     </Thead>
 

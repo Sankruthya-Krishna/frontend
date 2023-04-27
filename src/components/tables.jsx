@@ -6,6 +6,8 @@ import {
     Td,
     TableContainer,
     Tbody,
+    Center,
+  
   } from '@chakra-ui/react'
   import {React,useEffect,useState} from 'react'
 import Honey from './DataFetch'
@@ -32,9 +34,10 @@ const url="/api/data"
         fetchData()
     },[])
     return (
+      <Center>
       <div>
-        <TableContainer>
-  <Table variant='striped' colorScheme='gray'>
+        <TableContainer width={1200}>
+  <Table variant='striped' colorScheme='teal'>
     {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
     <Thead>
       <Tr colorScheme='blue'
@@ -67,6 +70,7 @@ const url="/api/data"
   </Table>
 </TableContainer>
       </div>
+      </Center>
     )
   }
   

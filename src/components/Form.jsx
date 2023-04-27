@@ -1,22 +1,18 @@
-import { Select } from '@chakra-ui/react'
- 
-
 import React from 'react'
  import { Field, Form, Formik,ErrorMessage } from 'formik';
  import {
     FormControl,
     FormLabel,
-    Stack,
+    FormErrorMessage,
+    FormHelperText,
     Box,
     Input,
-   
     Button,
     Center,
-    Heading,
-    FormErrorMessage
+    Select,
+    Heading
   } from '@chakra-ui/react'
   import * as Yup from 'yup';
-  //import { UseState} from 'react'
 function Formk() {
   const  initialValues={
     fname:'',
@@ -32,8 +28,6 @@ function Formk() {
   const onSubmit=async(val,{resetForm})=>{
     try{
        const  res=await fetch('/api/data',{
-
-      
          method:'POST',
          headers:{
            'Content-Type':'application/json',
@@ -66,7 +60,6 @@ const validationSchema = Yup.object().shape({
   
   email: Yup.string().email('Invalid email').required('Email is required'),
 });
-
 
     return (
         <Center>
@@ -101,27 +94,26 @@ const validationSchema = Yup.object().shape({
               )}
             </Field>
             <Field name="email">
-              {({ field}) => (
-            
-                  <FormControl isInvalid={errors.dob && touched.dob}>
+              {({ field }) => (
+                 <FormControl isInvalid={errors.dob && touched.dob}>
                   <FormLabel htmlFor="email">Email</FormLabel>
                   <Input type='email' {...field} id="email" placeholder="Email" />
-                {errors.dob&&<FormErrorMessage >Email is required.</FormErrorMessage>}
-               </FormControl>
+               
+                </FormControl>
               )}
             </Field>
           
       <Field name="fathname">
-            {({ field }) => (
+            {({ field, form }) => (
               <FormControl isInvalid={errors.dob && touched.dob}>
-                <FormLabel htmlFor="firstName">Father Name</FormLabel>
+                <FormLabel htmlFor="firstName">Father name</FormLabel>
                 <Input type='name' {...field} id="fathname" placeholder="Father Name" />
                 <ErrorMessage name="fathname" component="div" />
               </FormControl>
             )}
           </Field>
       <Field name="mothname">
-            {({ field }) => (
+            {({ field, form }) => (
               <FormControl isInvalid={errors.mobN && touched.mobN}>
                 <FormLabel htmlFor="firstName">Mother Name</FormLabel>
                 <Input type='name' {...field} id="mothname" placeholder="Mother Name" />
@@ -130,18 +122,19 @@ const validationSchema = Yup.object().shape({
             )}
           </Field>
       <Field name="phonenum">
-            {({ field }) => (
+            {({ field, form }) => (
               <FormControl isInvalid={errors.prof && touched.prof}>
-                <FormLabel htmlFor="firstName">Mobile Number</FormLabel>
+                <FormLabel htmlFor="phonenum">Mobile Number</FormLabel>
                 <Input type='number' {...field} id="phonenum" placeholder="Mobile Number" />
                 <ErrorMessage name="phonenum" component="div" />
               </FormControl>
             )}
           </Field>
+         
           <Field name="branch">
-            {({ field }) => (
+          {({ field }) => (
               <FormControl isInvalid={errors.prof && touched.prof}>
-                <FormLabel htmlFor="firstName">Branch</FormLabel>
+                <FormLabel htmlFor="branch">Branch</FormLabel>
                 <Select size='md' name="branch" {...field} id="branch" placeholder='Select Branch'>
   <option value='cse'>CSE</option>
   <option value='ece'>ECE</option>
@@ -153,12 +146,6 @@ const validationSchema = Yup.object().shape({
               </FormControl>
             )}
           </Field>
-
-
-
-<FormLabel htmlFor="DOB">Date of Birth</FormLabel>
-<Input type='date'></Input>
-
           <Button width={500}
               mt={4}
               colorScheme='teal'
@@ -174,5 +161,10 @@ const validationSchema = Yup.object().shape({
       </Center>
     )
   }
-  
   export default Formk
+    
+   
+
+
+
+

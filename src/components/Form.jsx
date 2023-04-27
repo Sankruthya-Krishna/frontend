@@ -1,136 +1,178 @@
-// The below import defines which components come from formik
-import React ,{useState} from 'react'
- import { Field, Form, Formik } from 'formik';
+import { Select } from '@chakra-ui/react'
+ 
+
+import React from 'react'
+ import { Field, Form, Formik,ErrorMessage } from 'formik';
  import {
     FormControl,
     FormLabel,
-    FormErrorMessage,
+    Stack,
     Box,
     Input,
+   
     Button,
     Center,
-    Heading
+    Heading,
+    FormErrorMessage
   } from '@chakra-ui/react'
-
+  import * as Yup from 'yup';
+  //import { UseState} from 'react'
 function Formk() {
-    const [text,setText]=useState(true)
+  const  initialValues={
+    fname:'',
+    lname:'',
+    email:'',
+    branch:'',
+    phonenum:'',
+    fathname:'',
+    mothname:'',
 
-    function validateName(value) {
-      let error
-      if (!value) {
-        error = 'Name is required'
-      } else if (value.toLowerCase() !== 'naruto') {
-        error = "Jeez! You're not a fan 😱"
-      }
-      return error
+
+  }
+  const onSubmit=async(val,{resetForm})=>{
+    try{
+       const  res=await fetch('/api/data',{
+
+      
+         method:'POST',
+         headers:{
+           'Content-Type':'application/json',
+         },
+         body:JSON.stringify(val),
+       })
+       if(!res.ok)
+       {
+        console.log('err') 
+       }
+       if(res.ok)
+       {
+        console.log(res)
+       resetForm() 
+       }
+       
+    }catch(err){
+     console.log(err)
     }
-const onSubmit=async(val,{resetform})=>{
-try{
-    const a=await fetch('/api/data',{
-        method:'POST',
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify(val),
-    })
-    if(a.ok)
-    {
-setText(false)
-    }
-    resetform()
-}
-catch(err){
-    console.log(err)
-}
-}
+   }
+ 
+const validationSchema = Yup.object().shape({
+  fname: Yup.string().required('First Name is required'),
+  lname: Yup.string().required('Last Name is required'),
+  fathname: Yup.string().required('Father Name is required'),
+  mothname: Yup.string().required('Mother Name is required'),
+ 
+  branch: Yup.string().required('Branch is required'),
+  phonenum: Yup.string().required('Mobile Number is required'),
+  
+  email: Yup.string().email('Invalid email').required('Email is required'),
+});
+
+
     return (
         <Center>
         <Box width={500}>
-      <Formik
-        initialValues={{Fname:'',Lname:'',phno:'',Fathername:'' ,Mothername:'',email:'',DOB:''}}
-        onSubmit={onSubmit}
-      >
-        {(props) => (
-          <Form>
-            <Heading width={1000}
+        <Heading width={1000}
             mb='5'
-            mt='5'>STUDENT REGISTRATION FORM</Heading>
-            <Field name='Fname' validate={validateName}>
-              {({ field, form }) => (
-                <FormControl isInvalid={form.errors.name && form.touched.name}>
-                  <FormLabel>First name</FormLabel>
-                  <Input {...field} placeholder='Firstname' />
-                  <FormErrorMessage>{form.errors.Fname}</FormErrorMessage>
+            mt='5'>STUDENT REGISTRATION </Heading>
+        <Formik 
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+    
+        {({errors,touched, form})=>(
+          <Form>
+            <Field name="fname">
+              {({ field }) => (
+                 <FormControl isInvalid={errors.dob && touched.dob}>
+                  <FormLabel htmlFor="firstName">First Name</FormLabel>
+                  <Input type='name' {...field} id="fname" placeholder="First Name" />
+                  <ErrorMessage name="fname" component="div" />
                 </FormControl>
               )}
             </Field>
-            <Field name='Lname' validate={validateName}>
-              {({ field, form }) => (
-                <FormControl isInvalid={form.errors.name && form.touched.name}>
-                  <FormLabel>Last name</FormLabel>
-                  <Input {...field} placeholder='Lastname' />
-                  <FormErrorMessage>{form.errors.Lname}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field> 
-            <Field name='Fathername' validate={validateName}>
-              {({ field, form }) => (
-                <FormControl isInvalid={form.errors.name && form.touched.name}>
-                  <FormLabel>Father name</FormLabel>
-                  <Input {...field} placeholder='Fathername' />
-                  <FormErrorMessage>{form.errors.Fathername}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field> 
-            <Field name='Mothername' validate={validateName}>
-              {({ field, form }) => (
-                <FormControl isInvalid={form.errors.name && form.touched.name}>
-                  <FormLabel>Mother name</FormLabel>
-                  <Input {...field} placeholder='Mothername' />
-                  <FormErrorMessage>{form.errors.Mothername}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field> 
-              <Field name='phno' validate={validateName}>
-              {({ field, form }) => (
-                <FormControl isInvalid={form.errors.name && form.touched.name}>
-                  <FormLabel>phoneno.</FormLabel>
-                  <Input {...field} placeholder='Mobile no' />
-                  <FormErrorMessage>{form.errors.phno}</FormErrorMessage>
+            <Field name="lname">
+              {({ field }) => (
+                 <FormControl isInvalid={errors.dob && touched.dob}>
+                  <FormLabel htmlFor="lastName">Last Name</FormLabel>
+                  <Input type='name' {...field} id="lname" placeholder="Last Name" />
+                  <ErrorMessage name="lname" component="div" color='red'/>
                 </FormControl>
               )}
             </Field>
-            <Field name='email' validate={validateName}>
-              {({ field, form }) => (
-                <FormControl isInvalid={form.errors.name && form.touched.name}>
-                  <FormLabel>email</FormLabel>
-                  <Input {...field} placeholder='Email' />
-                  <FormErrorMessage>{form.errors.email}</FormErrorMessage>
-                </FormControl>
-                 )}
+            <Field name="email">
+              {({ field}) => (
+            
+                  <FormControl isInvalid={errors.dob && touched.dob}>
+                  <FormLabel htmlFor="email">Email</FormLabel>
+                  <Input type='email' {...field} id="email" placeholder="Email" />
+                {errors.dob&&<FormErrorMessage >Email is required.</FormErrorMessage>}
+               </FormControl>
+              )}
             </Field>
-            <Field name='DOB' validate={validateName}>
-              {({ field, form }) => (
-                <FormControl isInvalid={form.errors.name && form.touched.name}>
-                  <FormLabel>Date of birth</FormLabel>
-                  <Input {...field} placeholder='Date of birth' />
-                  <FormErrorMessage>{form.errors.DOB}</FormErrorMessage>
-                </FormControl>
-                 )}
-            </Field>
-            <Button width={500}
+          
+      <Field name="fathname">
+            {({ field }) => (
+              <FormControl isInvalid={errors.dob && touched.dob}>
+                <FormLabel htmlFor="firstName">Father Name</FormLabel>
+                <Input type='name' {...field} id="fathname" placeholder="Father Name" />
+                <ErrorMessage name="fathname" component="div" />
+              </FormControl>
+            )}
+          </Field>
+      <Field name="mothname">
+            {({ field }) => (
+              <FormControl isInvalid={errors.mobN && touched.mobN}>
+                <FormLabel htmlFor="firstName">Mother Name</FormLabel>
+                <Input type='name' {...field} id="mothname" placeholder="Mother Name" />
+                <ErrorMessage name="mothname" component="div" />
+              </FormControl>
+            )}
+          </Field>
+      <Field name="phonenum">
+            {({ field }) => (
+              <FormControl isInvalid={errors.prof && touched.prof}>
+                <FormLabel htmlFor="firstName">Mobile Number</FormLabel>
+                <Input type='number' {...field} id="phonenum" placeholder="Mobile Number" />
+                <ErrorMessage name="phonenum" component="div" />
+              </FormControl>
+            )}
+          </Field>
+          <Field name="branch">
+            {({ field }) => (
+              <FormControl isInvalid={errors.prof && touched.prof}>
+                <FormLabel htmlFor="firstName">Branch</FormLabel>
+                <Select size='md' name="branch" {...field} id="branch" placeholder='Select Branch'>
+  <option value='cse'>CSE</option>
+  <option value='ece'>ECE</option>
+  <option value='ce'>CE</option>
+  <option value='it'>IT</option>
+  <option value='mech'>MECH</option>
+    </Select>
+                <ErrorMessage name="branch" component="div" />
+              </FormControl>
+            )}
+          </Field>
+
+
+
+<FormLabel htmlFor="DOB">Date of Birth</FormLabel>
+<Input type='date'></Input>
+
+          <Button width={500}
               mt={4}
               colorScheme='teal'
-              isLoading={props.isSubmitting}
+              
               type='submit'
             >
               Submit
             </Button>
-          </Form>
-        )}
-      </Formik>
+      </Form>
+            )}
+    </Formik>
       </Box>
       </Center>
     )
   }
+  
   export default Formk

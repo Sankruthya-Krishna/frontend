@@ -11,9 +11,9 @@ import { ChakraProvider } from '@chakra-ui/react'
 //import Honey from './components/DataFetch';
 //import Tables from './components/tables';
 //import Success from './components/Success';
-import Login from './components/login';
+//import Login from './components/login';
 //import Column from './components/Column';
-//import Signup from './components/signin';
+import Signup from './components/signin';
 
 function App() {
   // 2. Wrap ChakraProvider at the root of your app
@@ -23,8 +23,8 @@ function App() {
      {/* <Formk/>
     <Tables/> */}
     {/* <Success/> */}
-    <Login/> 
-    {/* <Signup/> */}
+    {/* <Login/>  */}
+  <Signup/> 
     </ChakraProvider>
 
   )

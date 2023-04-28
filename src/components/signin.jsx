@@ -91,7 +91,7 @@ function Signup() {
                   
                   type='submit'
                 >
-                  Submit
+                  Signup
                 </Button>
             </Form>
        

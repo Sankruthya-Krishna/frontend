@@ -7,9 +7,11 @@ import { ChakraProvider } from '@chakra-ui/react'
 //import Tables from './components/tables';
 //import Formk from './components/Form';
 //import Dash from './components/Dashboard';
-import Formk from './components/Form'
+//import Formk from './components/Form'
 //import Honey from './components/DataFetch';
-import Tables from './components/tables';
+//import Tables from './components/tables';
+//import Success from './components/Success';
+import Login from './components/login';
 //import Column from './components/Column';
 
 function App() {
@@ -17,8 +19,10 @@ function App() {
   return (
     
   <ChakraProvider>
-     <Formk/>
-    <Tables/>
+     {/* <Formk/>
+    <Tables/> */}
+    {/* <Success/> */}
+    <Login/>
     </ChakraProvider>
 
   )

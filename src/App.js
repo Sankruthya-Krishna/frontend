@@ -13,7 +13,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 //import Success from './components/Success';
 //import Login from './components/login';
 //import Column from './components/Column';
-import Signup from './components/signin';
+import Signup from './components/signup';
 
 function App() {
   // 2. Wrap ChakraProvider at the root of your app

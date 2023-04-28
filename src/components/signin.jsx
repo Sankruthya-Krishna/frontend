@@ -13,7 +13,7 @@ import {
  import { Field, Form, Formik,ErrorMessage } from 'formik';
 function Signup() {
     const  initialValues={
-        uname:'',
+        email:'',
         pass:'',
         }
         const onSubmit=async(val,{resetForm})=>{

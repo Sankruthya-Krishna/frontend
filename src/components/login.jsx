@@ -11,10 +11,12 @@ import {
 } from '@chakra-ui/react'
   import * as Yup from 'yup';
   import { Field, Form, Formik,ErrorMessage } from 'formik';
+  import { Link } from '@chakra-ui/react'
+//import { ExternalLinkIcon } from '@chakra-ui/icons'
  
 function Login() {
     const  initialValues={
-        uname:'',
+        email:'',
         pass:'',
         }
         const onSubmit=async(val,{resetForm})=>{
@@ -88,12 +90,16 @@ function Login() {
             </Field>
             <Button width={400}
               mt={4}
+              mb={2}
               colorScheme='teal'
               
               type='submit'
             >
-              Submit
+              Login
             </Button>
+            <Link href='signup' isExternal ml={20} >
+  Don't have an account? Signup
+</Link>
         </Form>
    
    ) } 

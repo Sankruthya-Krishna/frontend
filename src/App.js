@@ -10,12 +10,14 @@ import { ChakraProvider } from '@chakra-ui/react'
 // import Navbar from './components/Navbar';
 // import { useAuthContext } from './hooks/useAuthContext';
 // import Tables from './components/Table';
-import Team from './components/team';
+//import Team from './components/team';
+import Grid from './components/grid'
 function App() {
   //const {user} =useAuthContext()
 return(
   <ChakraProvider>
-    <Team/>
+   
+    <Grid/>
   </ChakraProvider>
 )
 }

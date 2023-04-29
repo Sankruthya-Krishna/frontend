@@ -1,32 +1,57 @@
-//import logo from './logo.svg';
-import './App.css';
-import * as React from 'react'
-
-// 1. import `ChakraProvider` component
+//import { BrowserRouter, Routes, Route ,Navigate} from 'react-router-dom'
+import {React} from 'react'
+// import Honey from './components/DataFetch';
 import { ChakraProvider } from '@chakra-ui/react'
-//import Tables from './components/tables';
-//import Formk from './components/Form';
-//import Dash from './components/Dashboard';
-//import Formk from './components/Form'
-//import Honey from './components/DataFetch';
-//import Tables from './components/tables';
-//import Success from './components/Success';
-//import Login from './components/login';
-//import Column from './components/Column';
-import Signup from './components/signup';
-
+// import Dash from './components/Dashboard';
+// import Dash from './pages/Home'
+// import Formk from './components/Form';
+// import Login from './components/Login';
+// import Signup from './components/Signup';
+// import Navbar from './components/Navbar';
+// import { useAuthContext } from './hooks/useAuthContext';
+// import Tables from './components/Table';
+import Team from './components/team';
 function App() {
-  // 2. Wrap ChakraProvider at the root of your app
-  return (
-    
+  //const {user} =useAuthContext()
+return(
   <ChakraProvider>
-     {/* <Formk/>
-    <Tables/> */}
-    {/* <Success/> */}
-    {/* <Login/>  */}
-  <Signup/> 
-    </ChakraProvider>
-
-  )
+    <Team/>
+  </ChakraProvider>
+)
 }
+/* 
+ <BrowserRouter>
+ <Navbar/>
+ <Routes>
+  <Route
+  path='/'
+  element={user?<Dash/>:<Navigate to='/login'></Navigate>}
+  />
+  <Route
+  path='/register'
+  element={user?<Formk/>:<Navigate to='/login'></Navigate>}
+  />
+  <Route
+  path='/table'
+  element={user?<Tables/>:<Navigate to='/login'></Navigate>}
+  /> */
+//   <Route
+//   path='/login'
+//   element={!user?<Login/>:<Navigate to='/' />}
+//   />
+//   <Route
+//   path='/signup'
+//   element={!user?<Signup/>:<Navigate to='/' />}
+//   >
+  
+//   </Route>
+//   <Route path='/form' element={<Formk/>}/>
+//   </Routes>
+//  </BrowserRouter>
+// </ChakraProvider>
+
+
+
+
 export default App;
+

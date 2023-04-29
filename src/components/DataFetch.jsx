@@ -1,16 +1,4 @@
 import {React,useEffect,useState} from 'react'
-import {
-    Table,
-    Thead,
-    Tbody,
-
-    Tr,
-
-    Td,
-    TableCaption,
-    TableContainer,
-    Thread
-  } from '@chakra-ui/react'
 import Chart from './Chart'
 const url="/api/data"
 const Honey=()=>{
@@ -24,6 +12,7 @@ const Honey=()=>{
             if(res.ok)
             {
                 setData(js)
+                console.log(js)
             }
     
         }
@@ -37,13 +26,10 @@ const Honey=()=>{
     return(
     <div>
         {data&&data.map((i)=>(
-            
-            <Tr>
-                <Td>{i.fname+" "+i.lname}</Td>
-                <Td>{i.mothname}</Td>
-                <Td>{i.email}</Td>
-            </Tr>
-           
+            <>
+            {/* <Chart dd={i._id}/> */}
+            <h1>{i._id}</h1>
+            </>
         ))}
     </div>
     )

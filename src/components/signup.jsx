@@ -9,40 +9,19 @@ import {
     Center,
     Button
 } from '@chakra-ui/react'
+import {useSignup} from '../hooks/useSignup'
  import * as Yup from 'yup';
  import { Field, Form, Formik,ErrorMessage } from 'formik';
 function Signup() {
+  const {signup,error,isLoading} =useSignup()
     const  initialValues={
         email:'',
         pass:'',
         }
         const onSubmit=async(val,{resetForm})=>{
-            try{
-               const  res=await fetch('/api/data/signup',{
-                 method:'POST',
-                 headers:{
-                    'Content-Type':'application/json',
-                  },
-                  body:JSON.stringify(val),
-                })
-                if(!res.ok)
-                {
-                 console.log('err') 
-                }
-                if(res.ok)
-                {
-                 console.log(res)
-                resetForm() 
-                }
-                
-             }catch(err){
-              console.log(err)
-             }
+           await signup(val.email,val.pass)
          }
          const validationSchema = Yup.object().shape({
-           
-           
-            
             email: Yup.string().email('Invalid email').required('Email is required'),
             pass: Yup.string().required('password must contain minimum characters'),
           });
@@ -88,15 +67,16 @@ function Signup() {
                 <Button width={400}
                   mt={4}
                   colorScheme='teal'
-                  
+                  isDisabled={isLoading}
                   type='submit'
                 >
-                  Signup
+                  Sign up
                 </Button>
             </Form>
        
        ) } 
                 </Formik>
+                {error&&<div>{error}</div>}
                 </Box>
       </HStack>
     
@@ -104,4 +84,3 @@ function Signup() {
     }
     
     export default Signup
-    
